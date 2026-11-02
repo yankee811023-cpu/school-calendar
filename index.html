@@ -4,38 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>학사일정 시뮬레이터</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React & ReactDOM CDN (동일 라이브러리 교체) -->
+    <!-- React & ReactDOM CDN -->
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
   </head>
-  <body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+  <body>
     <div id="root"></div>
 
+    <!-- 기존에 만드신 App.jsx 불러오기 -->
+    <script type="text/babel" src="./App.jsx"></script>
+    
     <script type="text/babel">
-      const { useState } = React;
-
-      function CalendarSimulator() {
-        return (
-          <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-200 text-center">
-            <div className="inline-block p-3 bg-indigo-100 text-indigo-600 rounded-full mb-4">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold text-slate-800 mb-2">📅 학사일정 시뮬레이터</h1>
-            <p className="text-slate-600 text-sm mb-6">선생님들을 위한 일정 계산 및 의견 수합 도구입니다.</p>
-            <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 font-medium text-sm">
-              ✨ 웹 애플리케이션이 정상적으로 작동 중입니다!
-            </div>
-          </div>
-        );
-      }
-
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<CalendarSimulator />);
+      // App 컴포넌트가 로드될 때까지 확인 후 화면에 렌더링
+      const checkAndRender = setInterval(() => {
+        if (typeof App !== 'undefined') {
+          clearInterval(checkAndRender);
+          const root = ReactDOM.createRoot(document.getElementById('root'));
+          root.render(<App />);
+        }
+      }, 50);
     </script>
   </body>
 </html>
